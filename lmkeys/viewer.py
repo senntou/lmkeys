@@ -37,8 +37,12 @@ class LMDBViewer(App):
         Binding("q", "quit", "Quit", priority=True),
         Binding("h", "prev_page", "Previous", key_display="h"),
         Binding("l", "next_page", "Next", key_display="l"),
+        Binding("j", "cursor_down", "Down", key_display="j"),
+        Binding("k", "cursor_up", "Up", key_display="k"),
         ("left", "prev_page", "Previous"),
         ("right", "next_page", "Next"),
+        ("down", "cursor_down", "Down"),
+        ("up", "cursor_up", "Up"),
     ]
 
     def __init__(self, db_path: str, page_size: int = 30):
@@ -162,6 +166,16 @@ class LMDBViewer(App):
         """Move to the previous page."""
         if self.current_page > 0:
             self.load_page(self.current_page - 1)
+
+    def action_cursor_down(self) -> None:
+        """Move cursor down in the table."""
+        table = self.query_one("#keys_table", DataTable)
+        table.action_cursor_down()
+
+    def action_cursor_up(self) -> None:
+        """Move cursor up in the table."""
+        table = self.query_one("#keys_table", DataTable)
+        table.action_cursor_up()
 
     def on_unmount(self) -> None:
         """Clean up when the app is closed."""
