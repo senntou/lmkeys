@@ -1,86 +1,86 @@
 # lmkeys
 
-LMDBデータベースのキー一覧をターミナル上で確認するためのTUIツールです。
+A TUI tool for browsing LMDB database keys in the terminal.
 
-## 機能
+## Features
 
-- LMDBデータベースのキーを一覧表示
-- ページネーション機能（デフォルト30件/ページ）
-- h/lキー（またはカーソルキー）でページ移動
-- キーと値の型情報を表示
-- UTF-8デコード可能なキーは文字列として、不可能なキーは16進数で表示
-- 読み取り専用モードで安全にアクセス
+- Browse LMDB database keys in a list view
+- Pagination support (default: 30 items per page)
+- Navigate pages with h/l keys (or arrow keys)
+- Display key and value type information
+- UTF-8 decodable keys shown as strings, others as hexadecimal
+- Safe read-only access mode
 
-## インストール
+## Installation
 
-### 開発環境でのインストール
+### Development Installation
 
 ```bash
-# リポジトリのクローンまたは移動
+# Clone or navigate to the repository
 cd /path/to/lmkeys
 
-# 開発モードでインストール
+# Install in development mode
 pip install -e .
 ```
 
-### 通常のインストール
+### Standard Installation
 
 ```bash
 pip install .
 ```
 
-## 使い方
+## Usage
 
-基本的な使い方:
+Basic usage:
 
 ```bash
 lmkeys /path/to/lmdb/directory
 ```
 
-ページサイズを指定:
+Specify page size:
 
 ```bash
 lmkeys /path/to/lmdb/directory --page-size 50
 ```
 
-## キー操作
+## Key Bindings
 
-- `h` または `←`: 前のページへ
-- `l` または `→`: 次のページへ
-- `q`: 終了
+- `h` or `←`: Previous page
+- `l` or `→`: Next page
+- `q`: Quit
 
-## 値の型表示
+## Value Type Display
 
-値の型は以下のように判定されます:
+Value types are determined as follows:
 
-- **str**: UTF-8でデコード可能で印字可能な文字列
-- **int/bytes**: 1, 2, 4, 8バイトの整数の可能性があるデータ
-- **bytes**: その他のバイナリデータ
+- **str**: UTF-8 decodable and printable strings
+- **int/bytes**: Data that could be 1, 2, 4, or 8 byte integers
+- **bytes**: Other binary data
 
-各値には型名とバイト数が表示されます（例: `str (256 bytes)`）
+Each value shows its type name and byte size (e.g., `str (256 bytes)`)
 
-## 技術仕様
+## Technical Specifications
 
-- **Python**: 3.8以上
-- **依存ライブラリ**:
+- **Python**: 3.8 or higher
+- **Dependencies**:
   - lmdb >= 1.4.0
   - textual >= 0.47.0
 
-## プロジェクト構造
+## Project Structure
 
 ```
 lmkeys/
 ├── lmkeys/
-│   ├── __init__.py      # パッケージ初期化
-│   ├── __main__.py      # コマンドラインエントリーポイント
-│   ├── viewer.py        # TUI実装
-│   └── utils.py         # ユーティリティ関数
-├── pyproject.toml       # プロジェクト設定
-├── setup.py             # セットアップスクリプト
-├── requirements.txt     # 依存関係
-└── README.md            # このファイル
+│   ├── __init__.py      # Package initialization
+│   ├── __main__.py      # Command-line entry point
+│   ├── viewer.py        # TUI implementation
+│   └── utils.py         # Utility functions
+├── pyproject.toml       # Project configuration
+├── setup.py             # Setup script
+├── requirements.txt     # Dependencies
+└── README.md            # This file
 ```
 
-## ライセンス
+## License
 
 MIT License
